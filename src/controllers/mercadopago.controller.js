@@ -1,11 +1,11 @@
 import { Preference, MercadoPagoConfig } from "mercadopago";
-import dotenv from "dotenv";
+import {config} from "dotenv";
 
-dotenv.config();
+config();
 
 export async function createOrder(req, res) {
     try {
-      console.log(process.env.MERCADOPAGO_ACCESS_TOKEN);
+      console.log(`Token de acceso: ${process.env.MERCADOPAGO_ACCESS_TOKEN}`);
 
         const client = new MercadoPagoConfig({
             accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
