@@ -21,11 +21,7 @@ export async function createOrder(req, res) {
 
           });
 
-            console.log(client);
-
             const preference = new Preference(client);
-
-            console.log(preference);
 
             const response = await preference.create({
               body: {
@@ -80,6 +76,7 @@ export async function createOrder(req, res) {
 export async function mercadopagoWebhook(req, res) {
   console.log(req);
     const body = req.body;
+    console.log("Llego al webhook");
     console.log(body);
 
     return res.json({ status: 'ok' });   
