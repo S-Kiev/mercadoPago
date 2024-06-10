@@ -54,7 +54,8 @@ export async function createOrder(req, res) {
 export async function mercadopagoWebhook(req, res) {
     try {
         console.log("Llego al webhook");
-        console.log(req.body);
+        const body = await req.json();
+        console.log(body);
         return res.json({ status: 'ok' });
     } catch (error) {
         console.log(error);
