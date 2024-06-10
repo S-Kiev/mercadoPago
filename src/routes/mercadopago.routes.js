@@ -5,7 +5,7 @@ import { createOrder, mercadopagoWebhook } from '../controllers/mercadopago.cont
 
 router.get('/create-order', createOrder);
 
-router.get('/webhook', mercadopagoWebhook);
+router.post('/webhook', mercadopagoWebhook);
 
 router.get('/success', (req, res) => {
     res.send('Success');
