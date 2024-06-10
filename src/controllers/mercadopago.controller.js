@@ -1,32 +1,34 @@
-import { Preference, MercadoPagoConfig } from "mercadopago";
-import {config} from "dotenv";
+import { Preference, MercadoPagoConfig, Payment } from "mercadopago";
+import crypto from "crypto";
+import dotenv from "dotenv";
 
-config();
+dotenv.config();
+
+
 
 export async function createOrder(req, res) {
     try {
-      console.log(`Token de acceso: ${process.env.MERCADOPAGO_ACCESS_TOKEN}`);
 
-        const client = new MercadoPagoConfig({
-            accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
-            options: { timeout: 5000, idempotencyKey: "abc" },
-        });
+            const client = new MercadoPagoConfig({
+              accessToken: process.env.MERCADOPAGO_ACESS_TOKEN,
+              options: { timeout: 5000, idempotencyKey: "abc" },
 
+          });
 
-        const preference = new Preference(client);
+            const preference = new Preference(client);
 
-        const response = await preference.create({
-            body: {
+            const response = await preference.create({
+              body: {
                 items: [
-                    {
-                        id: "item-ID-1234",
-                        title: "Mi producto",
-                        currency_id: "UYU",
-                        picture_url: "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
-                        description: "Descripción del Item",
-                        quantity: 1,
-                        unit_price: 75.76
-                    }
+                  {
+                    id: "item-ID-1234",                  
+                    title: "Mi producto",
+                    currency_id: "UYU",
+                    picture_url: "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
+                    description: "Descripción del Item",
+                    quantity: 1,
+                    unit_price: 75.76
+                  }
                 ],
                 back_urls: {
                     success: `https://thriving-horse-799365.netlify.app/`,
@@ -35,12 +37,14 @@ export async function createOrder(req, res) {
                 },
                 auto_return: "approved",
                 metadata: {
-                    // Aquí los datos que quieras mandar
+                    // aqui los datos que quieras mandar
+                    // por ejemplo, el id del usuario
+                    // id del pedido
                 }
-            },
-        });
-
-        res.json(response.init_point);
+              },
+            });
+                
+            res.json(response.init_point);
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Error del servidor de Mercado Pago" });
