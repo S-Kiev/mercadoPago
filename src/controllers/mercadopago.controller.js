@@ -81,6 +81,8 @@ export async function mercadopagoWebhook(req, res) {
   console.log(req);
     const body = req.body;
     console.log(body);
+
+    return res.json({ status: 'ok' });   
     /*
     const headers = req.headers;
     const xRequestId = headers['x-request-id'];
