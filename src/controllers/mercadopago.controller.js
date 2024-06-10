@@ -63,8 +63,6 @@ export async function createOrder(req, res) {
                 }
                 */
             });
-
-            console.log(response);
                 
             res.json(response.init_point);
     } catch (error) {
@@ -75,7 +73,7 @@ export async function createOrder(req, res) {
 
 export async function mercadopagoWebhook(req, res) {
   console.log(req);
-    const body = req.body;
+    const body = await req.json();
     console.log("Llego al webhook");
     console.log(body);
 
